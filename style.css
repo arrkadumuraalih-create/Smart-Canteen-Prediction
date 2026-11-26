@@ -1,0 +1,320 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f6f3;
+    color: #26352c;
+    line-height: 1.6;
+}
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+.main-header {
+    background: #176b45;
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+    border-radius: 0 0 15px 15px;
+}
+
+.main-header h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.main-header p {
+    font-size: 18px;
+}
+
+.main-header span {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Common sections */
+.dashboard,
+.form-box,
+.graph-box,
+.history-box,
+.recommendation-box {
+    background: white;
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+h2 {
+    color: #176b45;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Dashboard cards */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: #edf7f0;
+    padding: 22px 12px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #d7eadc;
+}
+
+.stat-card h3 {
+    color: #176b45;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* Recommendation */
+.recommendation-box {
+    text-align: center;
+    background: #edf7f0;
+}
+
+.recommendation-box h3 {
+    font-size: 28px;
+    color: #176b45;
+    margin: 12px 0;
+}
+
+.recommendation-box p {
+    margin: 8px 0;
+}
+
+/* Prediction form */
+.form-box {
+    max-width: 750px;
+    margin: 25px auto;
+}
+
+.form-box > p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin: 12px 0 6px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd8cf;
+    border-radius: 7px;
+    font-size: 15px;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #176b45;
+}
+
+button {
+    background: #176b45;
+    color: white;
+    padding: 14px;
+    margin-top: 22px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #105333;
+}
+
+/* Prediction result */
+.result {
+    margin-top: 25px;
+    padding: 22px;
+    background: #edf7f0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.result h1 {
+    color: #176b45;
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.result h3 {
+    margin: 15px 0;
+}
+
+.result p {
+    margin: 8px 0;
+}
+
+.result hr {
+    border: none;
+    border-top: 1px solid #cbdccf;
+    margin: 18px 0;
+}
+
+.note {
+    color: #666;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+/* Error message */
+.error-message {
+    background: #ffe8e8;
+    color: #a12626;
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Graphs */
+.graph-box {
+    text-align: center;
+}
+
+.graph-box p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.graph-box img {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    margin: 15px auto 0;
+}
+
+/* Prediction history */
+.history-box {
+    text-align: center;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.history-box table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+}
+
+.history-box th,
+.history-box td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.history-box th {
+    background: #176b45;
+    color: white;
+}
+
+.history-box tr:nth-child(even) {
+    background: #f1f6f3;
+}
+
+/* Download button */
+.download-btn {
+    display: inline-block;
+    background: #176b45;
+    color: white;
+    padding: 12px 20px;
+    margin: 12px 0;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.download-btn:hover {
+    background: #105333;
+}
+
+.empty-message {
+    margin-top: 20px;
+    color: #777;
+}
+
+/* Footer */
+footer {
+    background: #176b45;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 30px;
+    border-radius: 12px 12px 0 0;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Responsive design */
+@media (max-width: 800px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        width: 95%;
+    }
+
+    .main-header h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard,
+    .form-box,
+    .graph-box,
+    .history-box,
+    .recommendation-box {
+        padding: 18px;
+    }
+}
