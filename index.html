@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Canteen Food Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="main-header">
+            <h1>Smart Canteen</h1>
+            <p>AI-Based Food Demand Prediction System</p>
+            <span>Smart Planning | Less Food Waste</span>
+        </header>
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+
+            <h2>Dashboard Overview</h2>
+
+            <div class="dashboard-cards">
+
+                <div class="stat-card">
+                    <h3>Total Records</h3>
+                    <p>{{ total_records }}</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Average Demand</h3>
+                    <p>{{ average_demand }} Plates</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Highest Demand</h3>
+                    <p>{{ highest_demand }} Plates</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Lowest Demand</h3>
+                    <p>{{ lowest_demand }} Plates</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Food Recommendation -->
+        <section class="recommendation-box">
+
+            <h2>Food Recommendation</h2>
+
+            <h3>{{ recommended_food }}</h3>
+
+            <p>Food item with the highest average demand in the dataset.</p>
+
+            <h2>{{ recommended_demand }} Plates</h2>
+
+            <p>Average demand</p>
+
+        </section>
+
+        <!-- Prediction Form -->
+        <section class="form-box">
+
+            <h2>Predict Food Demand</h2>
+
+            <p>Enter the details to estimate the required food quantity.</p>
+
+            {% if error_message %}
+                <div class="error-message">
+                    {{ error_message }}
+                </div>
+            {% endif %}
+
+            <form method="POST">
+
+                <label>Select Food Item</label>
+
+                <select name="food_item" required>
+                    <option value="">Choose Food</option>
+                    <option value="Idli">Idli</option>
+                    <option value="Dosa">Dosa</option>
+                    <option value="Meals">Meals</option>
+                    <option value="Fried Rice">Fried Rice</option>
+                </select>
+
+                <label>Select Day</label>
+
+                <select name="day" required>
+                    <option value="">Choose Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+
+                <label>Number of Students Present</label>
+
+                <input
+                    type="number"
+                    name="students_present"
+                    min="0"
+                    placeholder="Enter student count"
+                    required
+                >
+
+                <label>Is it an Exam Day?</label>
+
+                <select name="is_exam" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+
+                <label>Is it a Holiday?</label>
+
+                <select name="is_holiday" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+
+                <label>Actual Prepared Food Quantity</label>
+
+                <input
+                    type="number"
+                    name="prepared_quantity"
+                    min="0"
+                    placeholder="Enter prepared plates"
+                    required
+                >
+
+                <button type="submit">
+                    Predict Food Demand
+                </button>
+
+            </form>
+
+            <!-- Prediction Result -->
+            {% if prediction is not none %}
+
+            <div class="result">
+
+                <h2>Prediction Result</h2>
+
+                <h1>{{ prediction }} Plates</h1>
+
+                <p>Estimated food requirement</p>
+
+                <hr>
+
+                <h3>Food Quantity Analysis</h3>
+
+                <p>
+                    Prepared Quantity:
+                    <strong>{{ prepared_quantity }} Plates</strong>
+                </p>
+
+                <p>
+                    Estimated Surplus:
+                    <strong>{{ surplus }} Plates</strong>
+                </p>
+
+                <p>
+                    Possible Shortage:
+                    <strong>{{ shortage }} Plates</strong>
+                </p>
+
+                <p class="note">
+                    Surplus is an estimate compared with predicted demand,
+                    not confirmed food waste.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+        <!-- Actual vs Predicted Graph -->
+        <section class="graph-box">
+
+            <h2>Actual vs Predicted Food Demand</h2>
+
+            <p>Comparison of actual and predicted demand on test records.</p>
+
+            <img
+                src="{{ url_for('static', filename='prediction_graph.png') }}"
+                alt="Actual vs Predicted Food Demand Graph"
+            >
+
+        </section>
+
+        <!-- Food Item Graph -->
+        <section class="graph-box">
+
+            <h2>Food Item Demand Analysis</h2>
+
+            <p>Average demand for each food item.</p>
+
+            <img
+                src="{{ url_for('static', filename='food_demand_graph.png') }}"
+                alt="Food Item Demand Graph"
+            >
+
+        </section>
+
+        <!-- Prediction History -->
+        <section class="history-box">
+
+            <h2>Prediction History</h2>
+
+            <p>Recently recorded food demand predictions.</p>
+
+            <a href="{{ url_for('download_history') }}"
+               class="download-btn">
+                Download Prediction History
+            </a>
+
+            {% if recent_history %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Food Item</th>
+                            <th>Day</th>
+                            <th>Students</th>
+                            <th>Predicted Demand</th>
+                            <th>Prepared</th>
+                            <th>Surplus</th>
+                            <th>Shortage</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for item in recent_history %}
+
+                        <tr>
+                            <td>{{ item.date }}</td>
+                            <td>{{ item.food_item }}</td>
+                            <td>{{ item.day }}</td>
+                            <td>{{ item.students_present }}</td>
+                            <td>{{ item.predicted_demand }}</td>
+                            <td>{{ item.prepared_quantity }}</td>
+                            <td>{{ item.surplus }}</td>
+                            <td>{{ item.shortage }}</td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="empty-message">
+                No prediction history available yet.
+                Make your first prediction to see records here.
+            </p>
+
+            {% endif %}
+
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Smart Canteen | Food Waste Reduction System</p>
+            <p>Machine Learning Based Food Demand Prediction</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
